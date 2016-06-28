@@ -1,5 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { RouteParams } from '@angular/router-deprecated';
+
 import { Hero } from './hero';
+import { HeroService } from './hero.service';
 
 @Component({
   selector: 'my-hero-detail',
@@ -14,7 +17,17 @@ import { Hero } from './hero';
     </div>
   `
 })
-export class HeroDetailComponent {
-  @Input()
-  hero: Hero
+export class HeroDetailComponent implements OnInit {
+  constructor(
+    private heroService: HeroService,
+    private routeParams: RouteParams) {
+  }
+
+  ngOnInit() {
+    let id = +this.routeParams.get('id');
+    this.heroService.getHero(id)
+      .then(hero => this.hero = hero);
+  }
+
+  hero: Hero;
 }

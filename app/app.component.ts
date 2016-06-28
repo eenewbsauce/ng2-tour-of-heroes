@@ -3,6 +3,7 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/route
 
 import { HeroesComponent } from './heroes.component';
 import { DashboardComponent } from './dashboard.component';
+import { HeroDetailComponent } from './hero-detail.component';
 import { HeroService } from './hero.service';
 import { Hero } from './hero';
 
@@ -19,7 +20,8 @@ import { Hero } from './hero';
   directives: [
     HeroesComponent,
     ROUTER_DIRECTIVES,
-    DashboardComponent
+    DashboardComponent,
+    HeroDetailComponent
   ],
   providers: [
     HeroService,
@@ -38,6 +40,11 @@ import { Hero } from './hero';
     name: 'Dashboard',
     component: DashboardComponent,
     useAsDefault: true
+  },
+  {
+    path: '/detail/:id',
+    name: 'HeroDetail',
+    component: HeroDetailComponent
   }
 ])
 
