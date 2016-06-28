@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
 
 import { HeroesComponent } from './heroes.component';
+import { DashboardComponent } from './dashboard.component';
 import { HeroService } from './hero.service';
 import { Hero } from './hero';
 
@@ -8,11 +10,36 @@ import { Hero } from './hero';
   selector: 'my-app',
   template: `
     <h1>{{title}}</h1>
-    <my-heroes [heroes]="heroes"></my-heroes>
+    <nav>
+      <a [routerLink]="['Dashboard']">Dashboard</a>
+      <a [routerLink]="['Heroes']">Heroes</a>
+    </nav>
+    <router-outlet></router-outlet>
   `,
-  directives: [HeroesComponent],
-  providers: [HeroService]
+  directives: [
+    HeroesComponent,
+    ROUTER_DIRECTIVES,
+    DashboardComponent
+  ],
+  providers: [
+    HeroService,
+    ROUTER_PROVIDERS
+  ]
 })
+
+@RouteConfig([
+  {
+    path: '/heroes',
+    name: 'Heroes',
+    component: HeroesComponent
+  },
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: DashboardComponent,
+    useAsDefault: true
+  }
+])
 
 export class AppComponent implements OnInit {
   constructor(private heroService: HeroService) { }
