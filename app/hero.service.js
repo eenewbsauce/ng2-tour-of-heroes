@@ -20,7 +20,6 @@ var HeroService = (function () {
         return new Promise(function (resolve) {
             return setTimeout(function () { return resolve(mock_heroes_1.HEROES); }, 2000);
         } // 2 seconds
-         // 2 seconds
         );
     };
     HeroService = __decorate([
