@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
+let R = require('ramda');
+
 import { HEROES } from './mock-heroes';
 import { Hero } from './hero';
-
 
 @Injectable()
 export class HeroService {
@@ -15,4 +16,8 @@ export class HeroService {
     );
   }
 
+  getHero(id) {
+    var matchingHero = R.find(hero => (hero.id === id), HEROES);
+    return Promise.resolve(matchingHero);
+  }
 }
