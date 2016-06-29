@@ -18,6 +18,11 @@ export class HeroesComponent {
     private router: Router
   ) { }
 
+  heroes: Hero[];
+  selectedHero: Hero;
+  addingHero = false;
+  error: any;
+
   ngOnInit() {
     this.getHeroes();
   }
@@ -27,9 +32,26 @@ export class HeroesComponent {
       .then(heroes => this.heroes = heroes);
   }
 
-  selectedHero: Hero;
+  addHero() {
+    this.addingHero = true;
+    this.selectedHero = null;
+  }
 
-  heroes: Hero[];
+  close(savedHero: Hero) {
+    this.addingHero = false;
+    if (savedHero) { this.getHeroes(); }
+  }
+
+  delete(hero: Hero, event: any) {
+    event.stopPropagation();
+    this.heroService
+        .delete(hero)
+        .then(res => {
+          this.heroes = this.heroes.filter(h => h !== hero);
+          if (this.selectedHero === hero) { this.selectedHero = null; }
+        })
+        .catch(error => this.error = error); // TODO: Display error message
+  }
 
   onSelect(hero: Hero) {
     this.selectedHero = hero;
