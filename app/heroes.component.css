@@ -39,9 +39,20 @@
       background-color: #607D8B;
       line-height: 1em;
       position: relative;
-      left: -1px;
+      left: 1px;
       top: -4px;
       height: 1.8em;
       margin-right: .8em;
       border-radius: 4px 0 0 4px;
+    }
+    .heroes .delete-button {
+      position: absolute;
+      background-color: #73738a;
+      top: -12px;
+      right: 7px;
+      color: white;
+    }
+
+    .heroes .delete-button:hover {
+      background-color: #7ac8d0;
     }
