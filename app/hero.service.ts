@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
+//let R = require('ramda');
 let R = require('ramda');
 import 'rxjs/add/operator/toPromise';
 
