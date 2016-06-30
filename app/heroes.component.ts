@@ -1,4 +1,11 @@
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  Input,
+  trigger,
+  state,
+  style,
+  transition,
+  animate } from '@angular/core';
 import { Router } from '@angular/router-deprecated';
 
 import { HeroDetailComponent } from './hero-detail.component';
@@ -10,7 +17,19 @@ import { Hero } from './hero';
   templateUrl: 'app/heroes.component.html',
   styleUrls: ['app/heroes.component.css', 'app/hero-detail.component.css'],
   directives: [HeroDetailComponent],
-  providers: [HeroService]
+  providers: [HeroService],
+  animations: [
+    trigger('heroState', [
+      state('inactive', style({
+        backgroundColor: '#EEE'
+      })),
+      state('active',   style({
+        backgroundColor: '#CFD8DC'
+      })),
+      transition('inactive => active', animate('300ms ease-in')),
+      transition('active => inactive', animate('300ms ease-out'))
+    ])
+  ]
 })
 export class HeroesComponent {
   constructor(
@@ -29,7 +48,10 @@ export class HeroesComponent {
 
   getHeroes() {
     this.heroService.getHeroes()
-      .then(heroes => this.heroes = heroes);
+      .then(heroes => {
+        heroes.map(hero => hero.state = 'inactive');
+        this.heroes = heroes;
+      });
   }
 
   addHero() {
@@ -54,6 +76,8 @@ export class HeroesComponent {
   }
 
   onSelect(hero: Hero) {
+    this.heroes.map(hero => hero.state = 'inactive');
+    hero.state = 'active';
     this.selectedHero = hero;
   }
 

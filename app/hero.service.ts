@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 //let R = require('ramda');
-import * as R from 'ramda';
+let R = require('ramda');
 import 'rxjs/add/operator/toPromise';
 
 import { Hero } from './hero';

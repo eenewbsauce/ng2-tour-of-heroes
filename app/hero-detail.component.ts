@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { RouteParams } from '@angular/router-deprecated';
+import { RouteParams, Router } from '@angular/router-deprecated';
 
 import { Hero } from './hero';
 import { HeroService } from './hero.service';
@@ -12,8 +12,9 @@ import { HeroService } from './hero.service';
 export class HeroDetailComponent implements OnInit {
   constructor(
     private heroService: HeroService,
-    private routeParams: RouteParams) {
-  }
+    private routeParams: RouteParams,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     if (this.routeParams.get('id') !== null) {
@@ -40,7 +41,9 @@ export class HeroDetailComponent implements OnInit {
 
   goBack(savedHero: Hero = null) {
     this.close.emit(savedHero);
-    if (this.navigated) { window.history.back(); }
+    if (this.navigated) {
+      window.history.back();
+    }
   }
 
   @Input() hero: Hero;
