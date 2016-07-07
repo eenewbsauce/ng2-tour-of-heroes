@@ -6,11 +6,12 @@ import { DashboardComponent } from './dashboard.component';
 import { HeroDetailComponent } from './hero-detail.component';
 import { HeroService } from './hero.service';
 import { Hero } from './hero';
+import { HighlightDirective } from './attribute-directives/highlight.directive';
 
 @Component({
   selector: 'my-app',
   template: `
-    <h1>{{title}}</h1>
+    <h1 hoHighlight>{{title}}</h1>
     <nav>
       <a [routerLink]="['Dashboard']">Dashboard</a>
       <a [routerLink]="['Heroes']">Heroes</a>
@@ -22,7 +23,8 @@ import { Hero } from './hero';
     HeroesComponent,
     ROUTER_DIRECTIVES,
     DashboardComponent,
-    HeroDetailComponent
+    HeroDetailComponent,
+    HighlightDirective
   ],
   providers: [
     HeroService,
