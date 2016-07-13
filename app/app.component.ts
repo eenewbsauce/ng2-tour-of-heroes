@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
 
 import { HeroesComponent } from './heroes.component';
@@ -11,10 +11,13 @@ import { HighlightDirective } from './attribute-directives/highlight.directive';
 @Component({
   selector: 'my-app',
   template: `
-    <h1 hoHighlight>{{title}}</h1>
+    <h1 [hoHighlight]="color" [defaultColor]="'red'">{{title}}</h1>
     <nav>
       <a [routerLink]="['Dashboard']">Dashboard</a>
       <a [routerLink]="['Heroes']">Heroes</a>
+      <input name="color" type="radio" (click)="color='lightgreen'">Green
+      <input name="color" type="radio" (click)="color='yellow'">Yellow
+      <input name="color" type="radio" (click)="color='cyan'">Cyan
     </nav>
     <router-outlet></router-outlet>
   `,

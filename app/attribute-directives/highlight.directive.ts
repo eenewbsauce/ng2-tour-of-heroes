@@ -3,13 +3,20 @@ import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 @Directive({ selector: '[hoHighlight]' })
 export class HighlightDirective {
     private el: HTMLElement;
+    private _defaultColor = 'orange';
+
+    @Input('hoHighlight') highlightColor: string;
+
+    @Input() set defaultColor(colorName: string) {
+      this._defaultColor = colorName || this._defaultColor;
+    }
 
     constructor(el: ElementRef) {
       this.el = el.nativeElement;
     }
 
     @HostListener('mouseenter') onMouseEnter() {
-      this.highlight('yellow');
+      this.highlight(this.highlightColor || this._defaultColor);
     }
 
     @HostListener('mouseleave') onMouseLeave() {

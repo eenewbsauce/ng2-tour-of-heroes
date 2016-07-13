@@ -24,10 +24,10 @@ import { Hero } from './hero';
         backgroundColor: '#EEE'
       })),
       state('active',   style({
-        backgroundColor: '#CFD8DC'
+        backgroundColor: '#ff0000'
       })),
-      transition('inactive => active', animate('300ms ease-in')),
-      transition('active => inactive', animate('300ms ease-out'))
+      transition('inactive => active', animate('3000ms ease-in')),
+      transition('active => inactive', animate('3000ms ease-out'))
     ])
   ]
 })
